@@ -1,8 +1,8 @@
 export class HttpResponse {
     public readonly status: number;
-    public readonly data: string | {};
+    public readonly data: any;
     
-    constructor(data: string | {}, status: number) {
+    constructor(data: any, status: number) {
       this.status = status;
       this.data = data;
     }

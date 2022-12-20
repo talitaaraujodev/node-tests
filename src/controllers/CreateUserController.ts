@@ -5,8 +5,13 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   async create(request: Request, response: Response) {
-    const user = await this.userService.create(request.body);
+    try{
+      const user = await this.userService.create(request.body);
+      return response.status(201).json({user});
 
-    return response.status(201).json(user);
+    }
+    catch(erro: any){
+      response.status(erro.status || 500 ).json(erro);
+    }
   }
 }
