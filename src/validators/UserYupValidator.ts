@@ -31,8 +31,8 @@ import * as Yup from "yup";
                 err.inner.forEach((error: any) => {
                   errors[error.path] = error.message;
                 });
-                return {errors};
-              }
+                return { errors };
+            }
               
         }
     }
