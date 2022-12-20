@@ -1,6 +1,7 @@
 import { User } from '../entities/User';
 import { UsersRepositoryInMemory } from '../repositories/inMemory/UsersRepositoryInMemory';
 import { UsersRepository } from '../repositories/UsersRepository';
+import { BadRequestError } from '../utils/errors/BadRequestError';
 import { UserService } from './UserService';
 
 describe('Create user', () => {
@@ -35,7 +36,7 @@ describe('Create user', () => {
     await userService.create(userData);
 
     await expect(userService.create(userData)).rejects.toEqual(
-       new Error()
+      new BadRequestError("Usuário já é existente")
     );
   });
 });

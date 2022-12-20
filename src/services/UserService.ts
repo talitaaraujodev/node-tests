@@ -1,5 +1,6 @@
 import { User } from '../entities/User';
 import { UsersRepository } from '../repositories/UsersRepository';
+import { BadRequestError } from '../utils/errors/BadRequestError';
 
 interface CreateUserDto {
   name: string;
@@ -14,7 +15,7 @@ export class UserService {
     const userAlreadyExists = await this.usersRepository.findByEmail(data.username);
 
     if (userAlreadyExists) {
-      throw new Error();
+      throw new BadRequestError("Usuário já é existente");
     }
 
     const userCreate = User.create(data);
