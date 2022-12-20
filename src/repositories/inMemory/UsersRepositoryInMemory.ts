@@ -1,9 +1,8 @@
 import { v4 as uuid } from 'uuid';
-
 import { User } from '../../entities/User';
-import { IUsersRepository } from '../IUsersRepository';
+import { UsersRepository } from '../UsersRepository';
 
-export class UsersRepositoryInMemory implements IUsersRepository {
+export class UsersRepositoryInMemory implements UsersRepository {
   private users: User[] = [];
 
   async create(user: User): Promise<User> {

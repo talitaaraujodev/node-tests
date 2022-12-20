@@ -1,16 +1,15 @@
-import { User } from '../../entities/User';
-
-import { UsersRepositoryInMemory } from '../../repositories/in-memory/UsersRepositoryInMemory';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { CreateUserUseCase } from './CreateUserUseCase';
+import { User } from '../entities/User';
+import { UsersRepositoryInMemory } from '../repositories/inMemory/UsersRepositoryInMemory';
+import { UsersRepository } from '../repositories/UsersRepository';
+import { UserService } from './UserService';
 
 describe('Create user', () => {
-  let usersRepository: IUsersRepository;
-  let createUserUseCase: CreateUserUseCase;
+  let usersRepository: UsersRepository;
+  let userService: UserService;
 
   beforeAll(() => {
     usersRepository = new UsersRepositoryInMemory();
-    createUserUseCase = new CreateUserUseCase(usersRepository);
+    userService = new UserService(usersRepository);
   });
 
   it('should be able to create a new user', async () => {
@@ -20,7 +19,7 @@ describe('Create user', () => {
       username: 'testusername',
     };
 
-    const user = await createUserUseCase.execute(userData);
+    const user = await userService.create(userData);
 
     expect(user).toHaveProperty('id');
     expect(user.email).toEqual('test@test.com');
@@ -33,9 +32,9 @@ describe('Create user', () => {
       username: 'testexistingusername',
     };
 
-    await createUserUseCase.execute(userData);
+    await userService.create(userData);
 
-    await expect(createUserUseCase.execute(userData)).rejects.toEqual(
+    await expect(userService.create(userData)).rejects.toEqual(
        new Error()
     );
   });

@@ -1,9 +1,9 @@
-import { prisma } from '../../../../database/prisma';
+import { prisma } from '../../database/prisma';
 
 import { User } from '../../entities/User';
-import { IUsersRepository } from '../IUsersRepository';
+import { UsersRepository } from '../UsersRepository';
 
-export class UsersRepository implements IUsersRepository {
+export class UsersRepositoryImp implements UsersRepository {
   async findByEmail(username: string): Promise<boolean> {
     const user = await prisma.user.findUnique({
       where: {

@@ -3,7 +3,7 @@
  */
 
 import request from 'supertest';
-import { app } from '../../../../app';
+import app  from '../app';
 
 describe('Create User Controller', () => {
   it('Should be able to create a new user', async () => {
