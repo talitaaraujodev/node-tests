@@ -130,7 +130,7 @@ export default {
   
     // The paths to modules that run some code to configure or set up the testing environment before each test
      setupFiles: [
-      "<rootDir>/test/config.ts"
+      "<rootDir>/tests/config.ts"
      ],
   
     // A list of paths to modules that run some code to configure or set up the testing framework before each test
@@ -152,7 +152,8 @@ export default {
     // testLocationInResults: false,
   
     // The glob patterns Jest uses to detect test files
-    testMatch: ['**/*.test.ts'],
+    // testMatch: ['**/*.test.ts'],
+    testMatch:['**/tests/**/*.test.ts'],
     transform: {
       ".(ts|tsx)": "ts-jest"
     },

@@ -2,7 +2,7 @@ import { User } from '../../src/entities/User';
 import { UsersRepository } from '../../src/repositories/UsersRepository';
 import { BadRequestError } from '../../src/utils/errors/BadRequestError';
 import { UserService } from '../../src/services/UserService';
-import  {createMock} from 'ts-auto-mock';
+import {createMock} from 'ts-auto-mock';
 
 describe('User service', () => {
   let userService: UserService;
@@ -44,7 +44,6 @@ describe('User service', () => {
     const mockUsersRepository =  createMock<UsersRepository>();
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(true));
     userService = new UserService(mockUsersRepository);
-    console.log(userService)
 
     await expect(userService.create(userData)).rejects.toBeInstanceOf(BadRequestError);
   });  

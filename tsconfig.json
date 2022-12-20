@@ -3,7 +3,7 @@
     "plugins": [
       {
         "transform": "ts-auto-mock/transformer",
-        "cacheBetweenTests": false
+        "cacheBetweenTests": false,
       }
     ],
     "target": "es2016",
@@ -12,8 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true, 
-    "typeRoots": ["node_modules/yup"]
+    "skipLibCheck": true,
+    "allowJs": true
   },
-  "exclude": ["node_modules"]
 }
