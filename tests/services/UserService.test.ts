@@ -3,10 +3,11 @@ import { User } from '../../src/entities/User';
 import { UsersRepository } from '../../src/repositories/UsersRepository';
 import { BadRequestError } from '../../src/utils/errors/BadRequestError';
 import { UserService } from '../../src/services/UserService';
-import {createMock} from 'ts-auto-mock';
+import { createMock } from 'ts-auto-mock';
 
 describe('Create User Service', () => {
   let userService: UserService;
+  let mockUsersRepository = createMock<UsersRepository>()
 
   it('create_whenPassUserValid_returnSuccess', async () => {
     const userData: User = {
@@ -14,7 +15,7 @@ describe('Create User Service', () => {
       email: 'test@test.com',
       username: 'test username',
     };
-    const mockUsersRepository =  createMock<UsersRepository>();
+    
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
     mockUsersRepository.create = jest.fn((user) => Promise.resolve(user));
     userService = new UserServiceImp(mockUsersRepository);
@@ -29,7 +30,6 @@ describe('Create User Service', () => {
       username: 'test username',
     };
 
-    const mockUsersRepository =  createMock<UsersRepository>();
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
     userService = new UserServiceImp(mockUsersRepository);
 
@@ -42,7 +42,6 @@ describe('Create User Service', () => {
       username: 'testusername',
     };
 
-    const mockUsersRepository =  createMock<UsersRepository>();
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(true));
     userService = new UserServiceImp(mockUsersRepository);
 
@@ -55,7 +54,6 @@ describe('Create User Service', () => {
       username: 'testexistingusername',
     };
 
-    const mockUsersRepository =  createMock<UsersRepository>();
     mockUsersRepository.findByUsername = jest.fn(() => Promise.resolve(true));
     userService = new UserServiceImp(mockUsersRepository);
 
