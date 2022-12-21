@@ -4,7 +4,15 @@ import { User } from '../../entities/User';
 import { UsersRepository } from '../UsersRepository';
 
 export class UsersRepositoryImp implements UsersRepository {
-  async findByEmail(username: string): Promise<boolean> {
+  async findByEmail(email: string): Promise<boolean> {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    return !!user;
+  }
+  async findByUsername(username: string): Promise<boolean> {
     const user = await prisma.user.findUnique({
       where: {
         username,

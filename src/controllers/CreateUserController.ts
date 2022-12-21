@@ -8,10 +8,9 @@ export class UserController {
     try{
       const user = await this.userService.create(request.body);
       return response.status(201).json({user});
-
     }
     catch(erro: any){
-      response.status(erro.status || 500 ).json(erro);
+      response.status(erro.status || 500).json(erro);
     }
   }
 }
