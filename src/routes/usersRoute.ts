@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { userFactory } from '../factories/UserFactory';
+import { UserFactory }   from '../factories/UserFactory';
 
 const usersRoutes = Router();
 
 usersRoutes.post('/users', (request, response) =>
-  userFactory().create(request, response)
+  UserFactory.compose().create(request, response)
 );
 
 export { usersRoutes };

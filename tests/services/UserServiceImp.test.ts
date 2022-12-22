@@ -1,4 +1,4 @@
-import { UserServiceImp } from './../../src/services/implementations/UserServiceImp';
+import { UserServiceImp } from '../../src/services/implementations/UserServiceImp';
 import { User } from '../../src/entities/User';
 import { UsersRepository } from '../../src/repositories/UsersRepository';
 import { BadRequestError } from '../../src/utils/errors/BadRequestError';

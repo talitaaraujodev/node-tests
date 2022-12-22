@@ -2,9 +2,12 @@ import { UsersRepositoryImp } from '../repositories/implementations/UsersReposit
 import { UserController } from '../controllers/CreateUserController';
 import { UserServiceImp } from '../services/implementations/UserServiceImp';
 
-export const userFactory = () => {
-  const usersRepository = new UsersRepositoryImp();
-  const userService = new UserServiceImp(usersRepository);
-  const userController = new UserController(userService);
-  return userController;
-};
+export class UserFactory {
+  static compose () {
+    const usersRepository = new UsersRepositoryImp();
+    const userService = new UserServiceImp(usersRepository);
+    const userController = new UserController(userService);
+    return userController;
+    
+  }
+}
