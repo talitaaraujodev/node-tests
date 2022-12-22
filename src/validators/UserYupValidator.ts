@@ -3,7 +3,7 @@ import { User } from '../entities/User';
 import * as Yup from "yup";
 
 
- class UserYupValidator implements ValidatorInterface<User>{
+ class UserYupValidator implements ValidatorInterface<User> {
    async validate(entity: User) {
         try {          
            Yup
