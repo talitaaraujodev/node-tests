@@ -4,7 +4,8 @@
       {
         "transform": "ts-auto-mock/transformer",
         "cacheBetweenTests": false,
-      }
+      },
+      { "name": "typescript-tslint-plugin" }
     ],
     "target": "es2016",
     "module": "commonjs",

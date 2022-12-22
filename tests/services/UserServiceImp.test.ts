@@ -7,7 +7,7 @@ import { createMock } from 'ts-auto-mock';
 
 describe('Create User Service', () => {
   let userService: UserService;
-  let mockUsersRepository = createMock<UsersRepository>()
+  let mockUsersRepository = createMock<UsersRepository>();
 
   it('create_whenPassUserValid_returnSuccess', async () => {
     const userData: User = {
@@ -15,25 +15,29 @@ describe('Create User Service', () => {
       username: 'any_username',
       email: 'any_email@email.com',
     };
-    
+
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
     mockUsersRepository.create = jest.fn((user) => Promise.resolve(user));
     userService = new UserServiceImp(mockUsersRepository);
-  
-    expect(async () => { await userService.create(userData)}).not.toThrow(BadRequestError);
-})
+
+    expect(async () => {
+      await userService.create(userData);
+    }).not.toThrow(BadRequestError);
+  });
 
   it('create_whenPassUserInvalid_returnBadRequest', async () => {
     const userData: User = {
       name: '',
-      username: 'any_username',   
+      username: 'any_username',
       email: 'any_email@email.com',
     };
 
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
     userService = new UserServiceImp(mockUsersRepository);
 
-    await expect(userService.create(userData)).rejects.toBeInstanceOf(BadRequestError);
+    await expect(userService.create(userData)).rejects.toBeInstanceOf(
+      BadRequestError
+    );
   });
   it('create_whenPassEmailExistent_returnBadRequestError', async () => {
     const userData: User = {
@@ -45,8 +49,10 @@ describe('Create User Service', () => {
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(true));
     userService = new UserServiceImp(mockUsersRepository);
 
-    await expect(userService.create(userData)).rejects.toBeInstanceOf(BadRequestError);
-  });  
+    await expect(userService.create(userData)).rejects.toBeInstanceOf(
+      BadRequestError
+    );
+  });
   it('create_whenPassUsernameExistent_returnBadRequestError', async () => {
     const userData: User = {
       name: 'any_name',
@@ -57,7 +63,8 @@ describe('Create User Service', () => {
     mockUsersRepository.findByUsername = jest.fn(() => Promise.resolve(true));
     userService = new UserServiceImp(mockUsersRepository);
 
-    await expect(userService.create(userData)).rejects.toBeInstanceOf(BadRequestError);
-  });  
-
+    await expect(userService.create(userData)).rejects.toBeInstanceOf(
+      BadRequestError
+    );
+  });
 });
