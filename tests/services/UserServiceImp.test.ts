@@ -11,9 +11,9 @@ describe('Create User Service', () => {
 
   it('create_whenPassUserValid_returnSuccess', async () => {
     const userData: User = {
-      name: 'Test name',
-      email: 'test@test.com',
-      username: 'test username',
+      name: 'any_name',
+      username: 'any_username',
+      email: 'any_email@email.com',
     };
     
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
@@ -26,8 +26,8 @@ describe('Create User Service', () => {
   it('create_whenPassUserInvalid_returnBadRequest', async () => {
     const userData: User = {
       name: '',
-      email: 'test@test.com',
-      username: 'test username',
+      username: 'any_username',   
+      email: 'any_email@email.com',
     };
 
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(false));
@@ -37,9 +37,9 @@ describe('Create User Service', () => {
   });
   it('create_whenPassEmailExistent_returnBadRequestError', async () => {
     const userData: User = {
-      name: 'Test',
-      email: 'testexisting@test.com',
-      username: 'testusername',
+      name: 'any_name',
+      username: 'any_username',
+      email: 'any_email_existent@email.com',
     };
 
     mockUsersRepository.findByEmail = jest.fn(() => Promise.resolve(true));
@@ -49,9 +49,9 @@ describe('Create User Service', () => {
   });  
   it('create_whenPassUsernameExistent_returnBadRequestError', async () => {
     const userData: User = {
-      name: 'Test',
-      email: 'test@test.com',
-      username: 'testexistingusername',
+      name: 'any_name',
+      username: 'any_username_existent',
+      email: 'any_email@email.com',
     };
 
     mockUsersRepository.findByUsername = jest.fn(() => Promise.resolve(true));

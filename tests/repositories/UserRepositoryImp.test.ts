@@ -21,9 +21,9 @@ describe("Create User Repository", () => {
 it("create_whenPassUserValid_returnSuccess", async () => {
         const user = await prismaClient.user.create({
             data: {
-             name: "test_name",
-             username: 'test_username',
-             email: "test@test.com",
+              name: "any_name",
+              username: "any_username",
+              email: "any_email@email.com",
             },
             select: {
               id: true,
@@ -32,16 +32,16 @@ it("create_whenPassUserValid_returnSuccess", async () => {
             },
           });
 
-         expect(user).toHaveProperty('id');
-         expect(user.email).toEqual("test@test.com")
+    expect(user).toHaveProperty('id');
+    expect(user.email).toEqual("any_email@email.com")
 
  });  
 it("findOne_whenPassEmailValid_returnSuccess", async () => {
-   await prismaClient.user.create({
+  await prismaClient.user.create({
       data: {
-       name: "test_name",
-       username: 'test_username',
-       email: "test@test.com",
+        name: "any_name",
+        username: "any_username",
+        email: "any_email@email.com",
       },
       select: {
         id: true,
@@ -51,28 +51,28 @@ it("findOne_whenPassEmailValid_returnSuccess", async () => {
     });
   const user = await prismaClient.user.findUnique({
   where: {
-  email: "test@test.com",
+  email: "any_email@email.com",
   }
- })
-   expect(user).toHaveProperty('email');
+})
+  expect(user).toHaveProperty('email');
 
- });  
- it("findOne_whenPassEmailValid_returnSuccess", async () => {
+});  
+it("findOne_whenPassUsernameValid_returnSuccess", async () => {
   await prismaClient.user.create({
-     data: {
-      name: "test_name",
-      username: "test_username",
-      email: "test@test.com",
-     },
-     select: {
-       id: true,
-       email: true,
-       name: true,
-     },
-   });
- const user = await prismaClient.user.findUnique({
+    data: {
+      name: "any_name",
+      username: "any_username",
+      email: "any_email@email.com",
+    },
+    select: {
+    id: true,
+    email: true,
+    name: true,
+    },
+  });
+const user = await prismaClient.user.findUnique({
   where: {
-    username: "test_username",
+    username: "any_username",
 }
 })
   expect(user).toHaveProperty('username');
