@@ -1,12 +1,25 @@
-/**
- * @jest-environment ./prisma/prisma-environment-jest
- */
-
+import { PrismaClient } from "@prisma/client";
 import request from 'supertest';
 import app  from '../../src/app';
 import { BadRequestError } from '../../src/utils/errors/BadRequestError';
 
 describe('Create User Controller', () => {
+  let prismaClient: PrismaClient;
+    
+  beforeAll(async () => {
+      prismaClient = new PrismaClient();
+  
+      await prismaClient.$connect();
+    });
+  
+    beforeEach(async () => {
+      await prismaClient.user.deleteMany();
+    });
+  
+    afterAll(async () => {
+      await prismaClient.user.deleteMany();
+      await prismaClient.$disconnect();
+    });
   it('create_whenPassUserValid_returnSuccess', async () => {
     const response = await request(app).post('/users').send({
       username: 'test-integration',
